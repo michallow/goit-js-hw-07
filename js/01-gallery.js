@@ -3,10 +3,6 @@ import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 const gallery = document.querySelector(".gallery");
 
-document.body.addEventListener("keypress", (e) => {
-  if (e.key === "Escape") basicLightbox.close();
-});
-
 for (let item of galleryItems) {
   const galleryItem = document.createElement("div");
   galleryItem.classList.add("gallery__item");
@@ -33,9 +29,18 @@ gallery.addEventListener("click", (event) => {
     <img src="${event.target.dataset.source}" width="800" height="600">
   `);
 
-  lightbox.show();
-});
+  const closeLightboxOnEscape = function (e) {
+    if (e.key === 'Escape') {
+      lightbox.close();
+    }
+  };
 
+  lightbox.show();
+
+  lightbox.on('close', function () {
+    window.removeEventListener('keyup', closeLightboxOnEscape);
+  });
+});
 
 
 console.log(galleryItems);
