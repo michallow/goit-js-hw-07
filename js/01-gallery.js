@@ -32,15 +32,15 @@ gallery.addEventListener("click", (event) => {
   const closeLightboxOnEscape = function (e) {
     if (e.key === 'Escape') {
       lightbox.close();
+      window.removeEventListener('keyup', closeLightboxOnEscape);
     }
   };
 
   lightbox.show();
 
-  lightbox.on('close', function () {
-    window.removeEventListener('keyup', closeLightboxOnEscape);
+
+    window.addEventListener('keyup', closeLightboxOnEscape);
   });
-});
 
 
 console.log(galleryItems);
