@@ -5,7 +5,7 @@ import { galleryItems } from "./gallery-items.js";
 const gallery = document.querySelector(".gallery");
 
 for (let item of galleryItems) {
-  const galleryItem = document.createElement("div");
+  const galleryItem = document.createElement("il");
   galleryItem.classList.add("gallery__item");
 
   const galleryLink = document.createElement("a");
@@ -22,18 +22,20 @@ for (let item of galleryItems) {
   gallery.appendChild(galleryItem);
 }
 
-gallery.addEventListener('click', (event) => {
-    event.preventDefault();
-  
-    const lightbox = new SimpleLightbox('.gallery a', {
-      captionsData: 'alt',
-      captionPosition: 'bottom',
-      captionDelay: 250,
-    });
-
-    lightbox.show();
-  
-    window.addEventListener('keyup', closeLightboxOnEscape);
+const lightbox = new SimpleLightbox('.gallery a', {
+    captionsData: 'alt',
+    captionPosition: 'bottom',
+    captionDelay: 250,
   });
 
-console.log(galleryItems);
+// gallery.addEventListener('click', (event) => {
+//     event.preventDefault();
+  
+
+
+//     lightbox.show();
+  
+//     window.addEventListener('keyup', closeLightboxOnEscape);
+//   });
+
+// console.log(galleryItems);
