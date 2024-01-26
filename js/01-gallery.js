@@ -22,25 +22,54 @@ gallery.innerHTML = addGalleryMarkup;
 
 gallery.addEventListener("click", onImageClick);
 
+const lightbox = basicLightbox.create(
+  `
+    <img src="" width="1280">
+  `,
+  {
+    onShow: () => window.addEventListener("keydown", onEscape),
+    onClose: () => window.removeEventListener("keydown", onEscape),
+  }
+);
+
 function onImageClick(event) {
-    blockStandardAction(event);
+  event.preventDefault();
 
-    if (event.target.nodeName !== "IMG") {
-        return;
-    }
+  const dataSource = event.target.dataset.source;
+  if (!dataSource) return;
 
-    const lightbox = basicLightbox.create(`
-        <img src="${event.target.dataset.source}" width="800" height="600">
-    `);
-    lightbox.show();
+  lightbox.element().querySelector("img").src = dataSource;
 
-    document.addEventListener("keyup", (event) => {
-        if (event.key === "Escape") { 
-            lightbox.close();
-        }
-    });
+  lightbox.show();
 }
 
-function blockStandardAction(event) {
-    event.preventDefault();
+function onEscape(event) {
+  if (event.key !== "Escape") return;
+  lightbox.close();
 }
+
+
+
+
+// function onImageClick(event) {
+//     blockStandardAction(event);
+
+//     if (event.target.nodeName !== "IMG") {
+//         return;
+//     }
+
+//     const lightbox = basicLightbox.create(`
+//         <img src="${event.target.dataset.source}" width="800" height="600">
+//     `);
+//     lightbox.show();
+
+//     document.addEventListener("keyup", (event) => {
+//         if (event.key === "Escape") { 
+//             lightbox.close();
+//         }
+//     });
+// }
+
+// function blockStandardAction(event) {
+//     event.preventDefault();
+// }
