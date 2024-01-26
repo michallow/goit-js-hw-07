@@ -24,7 +24,7 @@ gallery.addEventListener("click", onImageClick);
 
 const lightbox = basicLightbox.create(
   `
-    <img src="" width="1280">
+    <img src="" width="500">
   `,
   {
     onShow: () => window.addEventListener("keydown", onEscape),
@@ -73,3 +73,4 @@ function onEscape(event) {
 // function blockStandardAction(event) {
 //     event.preventDefault();
 // }
+//
